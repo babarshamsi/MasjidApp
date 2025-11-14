@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:85419467150:android:b43f888ab0177539c704df",
+        "android_client_info": {
+          "package_name": "com.example.aqimus_salah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBidnfL9jpSOM-xl5BD921XA6i_iUIDuPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:85419467150:android:52a341fb5bed352dc704df",
         "android_client_info": {
           "package_name": "com.shamsi.masjid.app"
