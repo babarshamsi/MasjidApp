@@ -1,3 +1,4 @@
+import 'package:aqimus_salah/models/auth_result_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final authService = AuthService();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  var user;
+  late AuthResult authResult;
   bool isLogin = true;
 
   Future<void> submit() async {
@@ -24,22 +25,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
       if (isLogin) {
-        user = await authService.login(
+        authResult = await authService.login(
           emailController.text,
           passwordController.text,
         );
       } else {
-        user = await authService.signup(
+        authResult = await authService.signup(
           emailController.text,
           passwordController.text,
         );
       }
 
-     navigateToHomeScreenOrShowError(user);
+     navigateToHomeScreenOrShowError(authResult);
     }
 
-    void navigateToHomeScreenOrShowError(user) {
-      if (user != null && mounted) {
+    void navigateToHomeScreenOrShowError(AuthResult authResult) {
+      if (authResult.isSuccessful) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const HomeScreen()),
@@ -47,7 +48,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       } else {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text("Invalid credentials")));
+        ).showSnackBar(SnackBar(content: Text(authResult.errorMessage != null
+       ? authResult.errorMessage!
+        : "Something went wrong")));
       }
     }
 
