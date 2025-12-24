@@ -1,4 +1,5 @@
 import 'package:aqimus_salah/screens/auth/login_screen.dart';
+import 'package:aqimus_salah/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'SplashScreen.dart';
@@ -13,9 +14,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseFirestore.instance
-      .collection('test')
-      .add({'timestamp': DateTime.now()});
   runApp(const MasjidApp());
 }
 
@@ -30,7 +28,7 @@ class MasjidApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const SignUpScreen(),
     );
   }
 }
