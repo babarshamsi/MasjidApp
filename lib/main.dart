@@ -1,3 +1,4 @@
+import 'package:aqimus_salah/app/auth_wrapper.dart';
 import 'package:aqimus_salah/screens/auth/login_screen.dart';
 import 'package:aqimus_salah/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class MasjidApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const AuthWrapper(),
     );
   }
 }
