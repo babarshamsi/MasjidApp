@@ -19,11 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isLogin = true;
 
   Future<void> submit() async {
-    // var user;
-    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please enter email and password")),
-      );
+    if (checkIfEmptyFields(emailController.text, passwordController.text)) {
       return;
     }
 
@@ -39,6 +35,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       }
 
+     navigateToHomeScreenOrShowError(user);
+    }
+
+    void navigateToHomeScreenOrShowError(user) {
       if (user != null && mounted) {
         Navigator.pushReplacement(
           context,
@@ -50,6 +50,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ).showSnackBar(const SnackBar(content: Text("Invalid credentials")));
       }
     }
+
+    bool checkIfEmptyFields(String email, String password) {
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please enter email and password")),
+      );
+      return true;
+    }
+    return false;
+    }
+
 
   @override
   Widget build(BuildContext context) {
