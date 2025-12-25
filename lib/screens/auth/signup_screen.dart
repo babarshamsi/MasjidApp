@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/auth_service.dart';
-import '../home/home_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -13,6 +12,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  bool isLoading = false;
   final authService = AuthService();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -23,6 +23,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (checkIfEmptyFields(emailController.text, passwordController.text)) {
       return;
     }
+
+    setState(() => isLoading = true);
+
 
       if (isLogin) {
         authResult = await authService.login(
@@ -36,15 +39,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       }
 
+      setState(() => isLoading = false);
+
+      // TODO need to check what is this
+      if(!mounted) return;
+
      navigateToHomeScreenOrShowError(authResult);
     }
 
     void navigateToHomeScreenOrShowError(AuthResult authResult) {
       if (authResult.isSuccessful) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
+        // Auth Wrapper is handling and listening to user stream
       } else {
         ScaffoldMessenger.of(
           context,
@@ -86,8 +91,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: submit,
-              child: Text(isLogin ? "Login" : "Signup"),
+              onPressed: isLoading ? null : submit,
+              child: isLoading? const CircularProgressIndicator() : Text(isLogin ? "Login" : "Signup"),
             ),
             TextButton(
               onPressed: () => setState(() => isLogin = !isLogin),
