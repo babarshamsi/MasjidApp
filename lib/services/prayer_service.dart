@@ -9,15 +9,15 @@ class PrayerService {
 
   Stream<PrayerTime> getPrayerTimes() {
     return _firestore
-        .collection('mosques')
-        .doc('masjid_name')
+        .collection('Mosques')
+        .doc('masjid_001')
         .snapshots()
         .map((convert) {
           final data = convert.data();
           if (data == null || data.isEmpty || data['prayer_times'] == null) {
             throw Exception('Prayer times not found');
           }
-          return PrayerTime.fromMap(data);
+          return PrayerTime.fromMap(data['prayer_times']);
         });
     }
   }

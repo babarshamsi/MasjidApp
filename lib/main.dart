@@ -1,14 +1,7 @@
 import 'package:aqimus_salah/app/auth_wrapper.dart';
-import 'package:aqimus_salah/screens/auth/login_screen.dart';
-import 'package:aqimus_salah/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'SplashScreen.dart';
 import 'firebase_options.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

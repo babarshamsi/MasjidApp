@@ -20,7 +20,7 @@ class PrayerTime {
       fajr: json['fajr'] ?? 'N/A',
       zuhr: json['zuhr'] ?? 'N/A',
       asr: json['asr'] ?? 'N/A',
-      magrib: json['magrib'] ?? 'N/A',
+      magrib: json['maghrib'] ?? 'N/A',
       isha: json['isha'] ?? 'N/A',
       jummah: json['jummah'] ?? 'N/A',
     );
